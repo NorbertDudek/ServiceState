@@ -233,7 +233,7 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 var
   SectionList: TStrings;
 begin
-  FAppdataFolder := GetCommonAppdataFolder +'\akjsoftware\ServiceState';
+  FAppdataFolder := GetCommonAppdataFolder +'\NorbertDudek\ServiceState';
   ForceDirectories(AppdataFolder);
 
   FServiceDataList := TObjectList<TServiceData>.Create;
@@ -337,7 +337,10 @@ end;
 /// </summary>
 procedure TfrmMain.UpdateTrayIcon;
 begin
-  TrayIcon.IconIndex := GetServiceStateIcon(FServiceDataList[0].Name)
+  if FServiceDataList.Count > 0 then
+    TrayIcon.IconIndex := GetServiceStateIcon(FServiceDataList[0].Name)
+  else
+    TrayIcon.IconIndex := GetServiceStateIcon('');
 end;
 
 { TServiceData }
